@@ -47,7 +47,11 @@ The depth of the 5 layers are 24, 36, 48, 64 and 64, respectively.
 
 4 Dense layers are built on top of the convolutional ones with sizes of 1164, 100, 50,  10. After them there is the output node.
 
+In total there are 1.595.511 trainable parameters in the net.
+
 In all the layers a RELU activation function has been used and L2 regularization has been applied in order to penalize larger weights and break down possible degeneracy problems.
+
+I tested also the ELU activation function without finding any concrete advantage in using it.
 
 #### 2. Attempts to reduce overfitting in the model
 
@@ -71,48 +75,6 @@ During the training I used the center, left and right camera images taking into 
 
 ####1. Solution Design Approach
 
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-lambda_1 (Lambda)            (None, 160, 320, 3)       0         
-_________________________________________________________________
-cropping2d_1 (Cropping2D)    (None, 66, 200, 3)        0         
-_________________________________________________________________
-conv2d_1 (Conv2D)            (None, 31, 98, 24)        1824      
-_________________________________________________________________
-conv2d_2 (Conv2D)            (None, 14, 47, 36)        21636     
-_________________________________________________________________
-conv2d_3 (Conv2D)            (None, 5, 22, 48)         43248     
-_________________________________________________________________
-conv2d_4 (Conv2D)            (None, 3, 20, 64)         27712     
-_________________________________________________________________
-conv2d_5 (Conv2D)            (None, 1, 18, 64)         36928     
-_________________________________________________________________
-flatten_1 (Flatten)          (None, 1152)              0         
-_________________________________________________________________
-dense_1 (Dense)              (None, 1164)              1342092   
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 1164)              0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 100)               116500    
-_________________________________________________________________
-dropout_2 (Dropout)          (None, 100)               0         
-_________________________________________________________________
-dense_3 (Dense)              (None, 50)                5050      
-_________________________________________________________________
-dropout_3 (Dropout)          (None, 50)                0         
-_________________________________________________________________
-dense_4 (Dense)              (None, 10)                510       
-_________________________________________________________________
-dropout_4 (Dropout)          (None, 10)                0         
-_________________________________________________________________
-dense_5 (Dense)              (None, 1)                 11        
-=================================================================
-Total params: 1,595,511
-Trainable params: 1,595,511
-Non-trainable params: 0
-
-
 The overall strategy for deriving a model architecture was to ...
 
 My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
@@ -127,38 +89,33 @@ The final step was to run the simulator to see how well the car was driving arou
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-####2. Final Model Architecture
+#### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+As explained in a previous section the model consists of one Lamba layer + 1 cropping layer + 5 convolutional layer + 4 Dense layer.
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-![alt text](https://github.com/fvmassoli/fem-CarND-LaneLines-P1/blob/master/outputs/gray_scale.png "Grayed image")
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/model.png "Model")
 
 ####3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
-![alt text][image2]
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/center_driving.jpg)
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover in case it gets too close the street border. These images show what a recovery looks like starting from the righ side of the street:
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/center_2017_04_20_17_18_44_574.jpg)
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/center_2017_04_20_17_18_46_017.jpg)
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/center_2017_04_20_17_18_46_567.jpg)
 
 Then I repeated this process on track two in order to get more data points.
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+To augment the data sat, I also flipped the images in order to augment the data and to avoid overfitting. For example, here is an image that has then been flipped:
 
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+![alt text]("Original image")
+![alt text]("Flipped image")
 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 12 since afetr such a number of epochs, usually the early termination callback was called. I used an adam optimizer so that manually training the learning rate wasn't necessary.
