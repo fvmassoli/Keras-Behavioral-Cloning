@@ -1,4 +1,4 @@
-#**Behavioral Cloning** 
+# **Behavioral Cloning** 
 
 ---
 
@@ -12,12 +12,12 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-###Files Submitted & Code Quality
+### Files Submitted & Code Quality
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 * model.py containing the script to create and train the model
@@ -25,19 +25,19 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md summarizing the results
 
-####2. Submission includes functional code
+#### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5
 ```
 
-####3. Submission code is usable and readable
+#### 3. Submission code is usable and readable
 
 The model.py file contains the implementation of the CNN using keras. There is also an utils.py file which contains two methods for read data from the .csv file and load the images. 
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. An appropriate model architecture has been employed
+#### 1. An appropriate model architecture has been employed
 
 I tried several achitectures and since I got the best performances with the NVIDIA one I used that model in my project (lines 32-48).
 
@@ -49,7 +49,7 @@ The depth of the 5 layers are 24, 36, 48, 64 and 64, respectively.
 
 In all the layers a RELU activation function has been used and L2 regularization has been applied in order to penalize larger weights and break down possible degeneracy problems.
 
-####2. Attempts to reduce overfitting in the model
+#### 2. Attempts to reduce overfitting in the model
 
 In order to aviud overfitting I applied Dropout with prob=0.3 to the fullly connected layers.
 
@@ -57,17 +57,17 @@ I tested the use of generators in order to augment the data I recorder by drivin
 
 Moreover, I set the EarlyStopping callback (line 54-57) in order to stop the training if needed.
 
-####3. Model parameter tuning
+#### 3. Model parameter tuning
 
 In order to evaluate the loss of the CNN I used mse function coupled with Adam() optimizer (line50-53). 
 
-####4. Appropriate training data
+#### 4. Appropriate training data
 
 In order to train the model I acquire data by driving two laps clcokwise and two laps counterclockwise trying to stay as much as possible to the center of the road. I also recored few times a "hard recovery" from the street side.
 
 During the training I used the center, left and right camera images taking into account the appropriate steering angle correction (utils.py file, lines 57-73).
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
 ####1. Solution Design Approach
 
