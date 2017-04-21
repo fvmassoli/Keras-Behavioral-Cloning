@@ -92,7 +92,7 @@ Using a cropping2D layer I finally obtained an input shape of 66x200.
 In order to avoid overfitting I used dropout layers with prob=0.3 applied to the fully connected layers and I use the early stopping callback in order to stop the training as soon as no improvement happened among two consecutive epochs.
 
 
-
+ 
 #### 2. Final Model Architecture
 
 As explained in a previous section the model consists of one Lamba layer + 1 cropping layer + 5 convolutional layer + 4 Dense layer.
