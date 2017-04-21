@@ -99,7 +99,9 @@ Here is a visualization of the architecture
 ![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/model.png "Model")
 
 Here is a gif that shows the car driven by the CNN:
+
 ![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/behavioral_cloning.gif "")
+
 
 #### 3. Creation of the Training Set & Training Process
 
