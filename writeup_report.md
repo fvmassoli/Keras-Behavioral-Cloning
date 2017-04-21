@@ -85,7 +85,12 @@ I tested different values for validation percentage, batch suze, epochs, learnin
 
 I tested the RELU() and ELU() activation function and since I didn't obtain the expected improvement by using the ELU() I decided to use the RELU() function. 
 
-I also found a big improvement by cropping vertically the image, i.e. removing several pixels columns. 
+I also found a big improvement by cropping vertically the image, i.e. removing several pixels columns. In particular it improved upon some wierd behaviour such as turning continuously left and right of the car.
+
+Using a cropping2D layer I finally obtained an input shape of 66x200.
+
+In order to avoid overfitting I used dropout layers with prob=0.3 applied to the fully connected layers and I use the early stopping callback in order to stop the training as soon as no improvement happened among two consecutive epochs.
+
 
 
 #### 2. Final Model Architecture
