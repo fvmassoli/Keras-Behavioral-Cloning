@@ -73,21 +73,20 @@ During the training I used the center, left and right camera images taking into 
 
 ### Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+#### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+I started with a very simple NN made of two convolutional layer and two fully connected layers. I had some good results but after few turns the car usually crashed and went out of the street. I did another couple of example ending with the NVIDIA model that gave me the best performances. 
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+I prepared the dataset by recording two laps driven in opposite direction plus other "hard recoveries" and "bridge crossings". I then split the data ni training and validation set (20%). 
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+In order to augment the data I tried to use python generators but then the model training was very slow!! For that reason I decided to train my model using all the resources I had and so I produced new images by flipping and by changing the brightness of the original images. Having the images already produced it usally takes me 5 to 10 minutes to train my model.
 
-To combat the overfitting, I modified the model so that ...
+I tested different values for validation percentage, batch suze, epochs, learning rate, etc. I finally choosed the values that are implemented in the code. 
 
-Then I ... 
+I tested the RELU() and ELU() activation function and since I didn't obtain the expected improvement by using the ELU() I decided to use the RELU() function. 
 
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+I also found a big improvement by cropping vertically the image, i.e. removing several pixels columns. 
 
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 #### 2. Final Model Architecture
 
