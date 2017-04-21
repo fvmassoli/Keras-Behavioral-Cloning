@@ -58,7 +58,7 @@ I tested also the ELU activation function without finding any concrete advantage
 
 In order to avoid overfitting I added Dropout() layers with prob=0.3 to the fullly connected layers. Moreover, I set the EarlyStopping callback (line 54-57) in order to stop the training if needed.
 
-I tested the use of generators in order to augment the data I recorder by driving along the track. By the way, using generators really slowed down the training. I then decided to increase the acquried data and train the network withou the use of geenrators.
+I tested the use of generators in order to augment the data I recorder by driving along the track. By the way, using generators really slowed down the training. Since I have enough resources, I then decided to increase the acquried data and produced new images and then train the network without the use of geenrators.
 
 #### 3. Model parameter tuning
 
@@ -78,7 +78,7 @@ I started with a very simple NN made of two convolutional layer and two fully co
 
 I prepared the dataset by recording two laps driven in opposite direction plus other "hard recoveries" and "bridge crossings" recordings. I then split the data among training and validation set (20%). 
 
-In order to augment the data I tried to use python generators but then the model training was very slow!! For that reason I decided to train my model using all the resources I had and so I produced new images by flipping and by changing the brightness of the original images. Having the images already produced it usally takes me between 10 to 30 minutes to train the model.
+In order to augment the data I tried to use python generators but then the model training was very slow!! For that reason I decided to train my model using all the resources I had and so I produced new images by flipping, adding random shadows and by changing the brightness of the original images. Having the images already produced it usally takes me between 10 to 30 minutes to train the model.
 
 I tested different values for training parameters such as validation percentage, batch size, epochs, learning rate, dropout probability, etc. I finally choosed the values that are implemented in the code. 
 
@@ -112,11 +112,12 @@ I then recorded the vehicle recovering from the left side and right sides of the
 
 Then I repeated this process on track two in order to get more data points.
 
-To augment the data sat, I also flipped and randomly changed the brightness of the images. For example, here is an image that has been modified:
+To augment the data sat, I flipped, randomly added shadows and changed the brightness of the images. For example, here is an image that has been modified:
 
-![alt text]("Original image")
-![alt text]("Flipped image")
-
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/img/original.jpg "Original image")
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/img/flipped.jpg "Flipped image")
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/img/shadowed.jpg "Shadowed image")
+![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/img/augmented_brightness.jpg "Augmented brightness image")
  
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 12 since afetr such a number of epochs, usually the early termination callback was called. I used an adam optimizer so that manually training the learning rate wasn't necessary.
