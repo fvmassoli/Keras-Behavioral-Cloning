@@ -23,7 +23,7 @@ My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* run_1.mp4 containing a video that show the performances of the nueral network 
+* run1.mp4 containing a video that show the performances of the nueral network 
 * writeup_report.md summarizing the results
 
 #### 2. Submission includes functional code
@@ -56,17 +56,17 @@ I tested also the ELU activation function without finding any concrete advantage
 
 #### 2. Attempts to reduce overfitting in the model
 
-In order to avoid overfitting I added Dropout() layers with prob=0.3 to the fullly connected layers. Moreover, I set the EarlyStopping callback (line 54-57) in order to stop the training if needed.
+In order to avoid overfitting I added Dropout() layers with prob=0.3 to the fullly connected layers. Moreover, I set the EarlyStopping callback (line 55-58) in order to stop the training if needed.
 
-I tested the use of generators in order to augment the data I recorder by driving along the track. By the way, using generators really slowed down the training. Since I have enough resources, I then decided to increase the acquried data and produced new images and then train the network without the use of geenrators.
+I tested the use of generators in order to augment the data I recorder by driving along the track. By the way, using generators really slowed down the training. Since I have enough resources, I then decided to increase the acquried data and to produce new images and then train the network without the use of geenrators.
 
 #### 3. Model parameter tuning
 
-In order to evaluate the loss of the CNN I used mse function coupled with Adam() optimizer (line50-53). 
+In order to evaluate the loss of the CNN I used mse function coupled with Adam() optimizer (line 51-53). 
 
 #### 4. Appropriate training data
 
-In order to train the model I acquire data by driving two laps clockwise and two laps counterclockwise trying to stay as much as possible close to the center of the road. I also recored few times a "hard recovery" from the street side.
+At the beginning I tried to acquire data by driving as close as possbile to the center of the street. By the way, such a strategy required a lot of small steering adjustements. Train the model with that data resulted in a car that continuosly shaked from one side to other of the street. A better approach has been to try to steer much less and let the car move straight as much as possible eventhough it was displacing fro the exact center of the road. Thar strategy worked much better in order to train the da data. Using such a concept I acquired two laps driving clockwise and two laps counterclockwise. I also recored few times a "hard recovery" from the street side.
 
 During the training I used the center, left and right camera images taking into account the appropriate steering angle correction (utils.py file, lines 57-73).
 
@@ -74,7 +74,7 @@ During the training I used the center, left and right camera images taking into 
 
 #### 1. Solution Design Approach
 
-I started with a very simple NN made of two convolutional layer and two fully connected layers. I had some good results but after few turns the car usually crashed and went out of the street. I did another few more trials ending with the NVIDIA model that gave me the best performances. 
+I started with a very simple NN made of two convolutional layer and two fully connected layers. I had some good results but after few turns the car usually crashed and went out of the street. I did another few more trials ending with the NVIDIA model that gave me the best performances. The model has been implemented in the model.py file (line 31-49).
 
 I prepared the dataset by recording two laps driven in opposite direction plus other "hard recoveries" and "bridge crossings" recordings. I then split the data among training and validation set (20%). 
 
@@ -117,7 +117,7 @@ I then recorded the vehicle recovering from the left side and right sides of the
 
 Then I repeated this process on track two in order to get more data points.
 
-To augment the data sat, I flipped, randomly added shadows and changed the brightness of the images. For example, here is an image that has been modified:
+To augment the dataset I flipped, randomly added shadows and changed the brightness of the images. For example, here is an image that has been modified:
 
 ![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/img/original.jpg "Original image")
 ![alt text](https://github.com/fvmassoli/fvmassoli-CarND-Behavioral-Cloning-P3/blob/master/examples/img/flipped.jpg "Flipped image")
