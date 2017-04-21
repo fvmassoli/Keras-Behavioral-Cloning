@@ -11,8 +11,9 @@ import matplotlib.pyplot as plt
 from IPython.display import SVG
 from keras.utils.vis_utils import model_to_dot
 
-lines = read_file()
-features, labels = prepare_dataset(lines)
+base_path = 'simulator_outputs/training_20_04_2017'
+lines = read_file(base_path=base_path)
+features, labels = prepare_dataset(base_path=base_path, lines=lines)
 
 NB_EPOCHS=15
 BATC_SIZE=128
@@ -66,7 +67,6 @@ history_object = model.fit(features,
 
 model.summary()
 model.save('model2.h5')
-SVG(model_to_dot(model).create(prog='dot', format='svg'))
 plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
 
 

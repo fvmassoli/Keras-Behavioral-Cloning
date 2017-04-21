@@ -4,14 +4,15 @@ import numpy as np
 import matplotlib.image as mpimg
 
 
-def read_file():
+def read_file(base_path):
     '''
     Read the csv file containing info about dataset
     :param base_path: base path to source images
     :return: list of images path
     '''
     lines = []
-    with open('simulator_outputs/training_20_04_2017/driving_log.csv') as csvfile:
+    file_path = base_path + '/driving_log.csv'
+    with open(file_path) as csvfile:
 
         reader = csv.reader(csvfile)
         i = 0
@@ -24,14 +25,13 @@ def read_file():
     return lines
 
 
-def prepare_dataset(lines):
+def prepare_dataset(base_path, lines):
     '''
     Reads images and the respective value of the steering angle
     :param base_path: base path to source file
     :param lines: list of paths to source images
     :return: features, labels and shape of the input images
     '''
-    base_path='simulator_outputs/training_20_04_2017/'
     images = []
     steering_measurements = []
     i=0
@@ -49,9 +49,9 @@ def prepare_dataset(lines):
         filename_l = left_camera_image.split('/')[-1]
         filename_r = right_camera_image.split('/')[-1]
 
-        path_c = base_path + 'IMG/' + filename_c
-        path_l = base_path + 'IMG/' + filename_l
-        path_r = base_path + 'IMG/' + filename_r
+        path_c = base_path + '/IMG/' + filename_c
+        path_l = base_path + '/IMG/' + filename_l
+        path_r = base_path + '/IMG/' + filename_r
 
 
         image_c = mpimg.imread(path_c)
